@@ -3,7 +3,7 @@ title: Chicory AI
 description: "Chicory AI Documentation"
 email: hello@chicory.ai
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://chicory.ai"
+url: "https://www.chicory.ai"
 github:
   is_project_page: true
 plugins:
