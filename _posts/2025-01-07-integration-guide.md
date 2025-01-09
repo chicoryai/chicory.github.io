@@ -1,7 +1,8 @@
 ---
-layout: post
+layout: page
 title: "Chicory Integration Guide"
-date: 2025-01-04
+date:   2025-01-07 00:16:37 -0800
+categories: jekyll update
 ---
 
 # Chicory AI Integration Guide for Platform Services
