@@ -184,38 +184,43 @@ This guide provides detailed steps for integrating your infrastructure with vari
 
 **Steps**:
 
-1. **Install the Slack Bot to Your Workspace**:
-   - Use the provided installation link to add the bot to your Slack workspace.
-   - Review the requested permissions and click **Allow** to authorize the app.
+1. **Create a Slack App**:
+   - Go to the [Slack API Dashboard](https://api.slack.com/apps).
+   - Click Create an App and choose From Scratch.
+   - Provide an App Name (e.g., "Chicory Bot") and select your workspace.
+   - Click **Create App**.
 
-2. **Verify Bot Permissions**:
-   - Ensure the bot has the following permissions:
+2. **Configure OAuth & Permissions:**:
+   - In the App settings, navigate to OAuth & Permissions.
+   - Add the following Bot Token Scopes under **Scopes**:
      - **`chat:write`**: To send messages in channels and DMs.
      - **`channels:history`**: To read message history from public channels.
      - **`app_mentions:read`**: To listen for mentions of the bot.
      - **`im:history`**: To read message history in direct messages (optional).
      - **`channels:read`**: To access basic channel information.
-
-   - Slack Integration Config :![image](/images/slack.png)
-   - Slackbot Token: ![image](/images/slack_oauth.png)
+   - Save changes.
+      - Slack Integration Config :![image](/images/slack.png)
+      ```bash
+      In short - the steps to verify permissions:
+         1. Navigate to your Slack App dashboard at Slack API Apps.
+         2. Go to **OAuth & Permissions** and review the scopes listed under Bot Token Scopes.
+         3. Ensure the following scopes are included:
+            chat:write
+            channels:history
+            app_mentions:read
+            im:history (optional)
+            channels:read
+      ```
+   - Generate OAuth Tokens:
+      - Click Install App to Workspace.
+      - Review the permissions and authorize the app for your workspace.
+      - Save the generated Bot User OAuth Token securely.
+      - Slackbot Token: ![image](/images/slack_oauth.png)
    - Slackbot Signing Secret: ![image](/images/slack_sign_sec.png)
    - Slackbot Bot Id: With the OAuth Access Token, you can request for BOT ID, It should start with B (e.g., B01ABCDEFG).
    ```
    curl -X POST -H "Authorization: Bearer xoxb-your-token" https://slack.com/api/auth.test
    ```
-
-
-```bash
-In short - the steps to verify permissions:
-   1. Navigate to your Slack App dashboard at Slack API Apps.
-   2. Go to **OAuth & Permissions** and review the scopes listed under Bot Token Scopes.
-   3. Ensure the following scopes are included:
-        chat:write
-        channels:history
-        app_mentions:read
-        im:history (optional)
-        channels:read
-```
 
 3. Update `values.yaml` file witk Slack environment variables:
     
@@ -260,6 +265,10 @@ In short - the steps to verify permissions:
       "channel": "#general"
       }
       ```
+
+9. **Add the app/bot to target channel**:
+   - add the app to a channel: settings of a channel -> Integrations -> add apps -> target <Chicory> app: ![alt text](/images/slack-app.png)
+   - add the bot to the channel: like an user by using @Chicory: ![alt text](/images/slack-bot.png)
 
 This setup allows the Slack bot to interact with users, fetch content from channels, and pass user inputs to the backend inference service for processing and responses.
 

@@ -217,7 +217,7 @@ kubectl logs <pod-name> -n chicory-ai  # Then get the logs using the pod name
 
 ### 5. [REQUIRED] Restart your discovery svc after job training completes
 ```bash
-kubectl rollout restart deployment discovery-api -n chicory-ai
+kubectl rollout restart statefulset discovery-api -n chicory-ai
 ```
 
 ---
