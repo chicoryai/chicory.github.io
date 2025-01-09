@@ -1,0 +1,58 @@
+api:
+  image: "<chicory-team-account>.dkr.ecr.us-west-2.amazonaws.com/chicory/discovery-inference:dev"
+  replicas: 2
+  service:
+    type: LoadBalancer
+    port: 80
+  env:
+    S3_BUCKET: "chicory-agent-api-bucket"
+    S3_REGION: "us-west-2"
+    PROJECT: "TestOrg"
+    LOG_LEVEL: "DEBUG"
+
+job:
+  image: "<chicory-team-account>.dkr.ecr.us-west-2.amazonaws.com/chicory/discovery-training:dev"
+  env:
+    S3_BUCKET: "chicory-agent-api-bucket"
+    S3_REGION: "us-west-2"
+    PROJECT: "TestOrg"
+    LOG_LEVEL: "DEBUG"
+    RUN_TRAINING: "True" # Can be set to False if case training is not needed; defaults to true
+    RESET_DATA: "False" # No need to set it to True for every run; defaults to false
+    DISABLE_DATABRICKS_SCANNING: "False" # defaults to false
+    DISABLE_CONFLUENCE_SCANNING: "False" # defaults to false
+    DISABLE_GOOGLE_DOCS_SCANNING: "False" # defaults to false
+    DISABLE_GITHUB_SCANNING: "False" # defaults to false
+
+volume:
+  mountPath: "/app/data"
+
+serviceAccount:
+  create: true
+  name: "chicory"
+  annotations: ""
+
+secrets:
+  OPENAI_API_KEY: ""
+  DATABRICKS_ACCESS_TOKEN: ""
+  DATABRICKS_HOST: ""
+  DATABRICKS_HTTP_PATH: ""
+  DATABRICKS_CATALOG: ""
+  DATABRICKS_SCHEMA: ""
+  SLACK_BOT_TOKEN: ""
+  SLACK_BOT_ID: ""
+  SLACK_SIGNING_SECRET: ""
+  GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY_ID: ""
+  GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY: ""
+  GOOGLE_SERVICE_ACCOUNT_CLIENT_ID: ""
+  GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL: ""
+  GOOGLE_SERVICE_ACCOUNT_CLIENT_CERT_URL: ""
+  GOOGLE_PROJECT_ID: ""
+  GOOGLE_FOLDER: ""
+  CONFLUENCE_BASE_URL: ""
+  CONFLUENCE_API_TOKEN: ""
+  CONFLUENCE_SPACE_KEY: ""
+  CONFLUENCE_EMAIL: ""
+  GITHUB_ACCESS_TOKEN: ""
+  GITHUB_USERNAME: ""
+  GITHUB_BASE_URL: ""

@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-language" content="en">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Integration</title>
+  <meta name="description" content="Integration Guide for Platform Services">
+  
+  <meta name="theme-color" content="red">    
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+  <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="canonical" href="http://localhost:4000/chicory.github.io/docs/integration">
+  <link rel="alternate" type="application/rss+xml" title="Chicory AI" href="http://localhost:4000/chicory.github.io/feed.xml">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">      
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">  
+  <script src="/chicory.github.io/assets/js/modernizr.74668098.js"></script>
+  <link rel="shortcut icon" href="/chicory.github.io/assets/img/favicon.png"> 
+  <link rel="stylesheet" href="/chicory.github.io/assets/css/main.css">
+  <link rel="stylesheet" href="/chicory.github.io/assets/css/palette.css">
+
+
+  <body dir="ltr" data-md-color-primary="red" data-md-color-accent="red">
+    <svg class="md-svg">
+<defs>
+  <svg>
+  <path d="M160 304q0 10-3.125 20.5t-10.75 19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75 19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360 304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25 2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75 1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75 0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5 46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
+</defs></svg>
+
+    <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off>
+<input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off>
+    <label class=md-overlay data-md-component=overlay for=__drawer></label> <a href="#integration" tabindex=1 class=md-skip> Skip to content </a>
+    <header class=md-header data-md-component=header>
+        <nav class="md-header-nav md-grid">
+            <div class=md-flex>
+                <div class="md-flex__cell md-flex__cell--shrink">
+                  <a class="md-header-nav__button md-logo" href="http://localhost:4000" title="Chicory AI">
+                    <img height="" src="/chicory.github.io/assets/img/favicon.png" width=""></a>
+                </div>
+                <div class="md-flex__cell md-flex__cell--shrink">
+                    <label class="md-icon md-icon--menu md-header-nav__button" for=__drawer></label>
+                </div>
+                <div class="md-flex__cell md-flex__cell--stretch">
+                    <div class="md-flex__ellipsis md-header-nav__title" data-md-component=title> 
+                        <span class=md-header-nav__topic>Chicory AI</span>
+                        <span class=md-header-nav__topic>Integration</span>
+                    </div>
+                </div>
+                <div class="md-flex__cell md-flex__cell--shrink">
+                    <label class="md-icon md-icon--search md-header-nav__button" for=__search></label>
+                    <div class=md-search data-md-component=search role=dialog>
+                        <label class=md-search__overlay for=__search></label>
+                        <div class=md-search__inner role=search>
+                            <form class=md-search__form name=search>
+                                <input type=text class=md-search__input name=query placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=query data-md-state=active>
+                                <label class="md-icon md-search__icon" for=__search></label>
+                                <button type=reset class="md-icon md-search__icon" data-md-component=reset tabindex=-1> &#xE5CD; </button>
+                            </form>
+                            <div class=md-search__output>
+                                <div class=md-search__scrollwrap data-md-scrollfix>
+                                    <div class=md-search-result data-md-component=result>
+                                        <div class=md-search-result__meta> Type to start searching </div>
+                                        <ol class=md-search-result__list></ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <div class="md-header-nav__source">
+          <a class="md-source" data-md-source="github" href="https://github.com/chicoryai/chicory.github.io" title="Go to repository">
+          <div class="md-source__icon" style="padding-top:5px">
+            <i class="fa fa-github fa-3x"></i>
+          </div>
+          <div class="md-source__repository">
+            chicoryai/chicory.github.io
+          </div></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <div class="md-container">         
+        <main class="md-main">
+            <div class="md-main__inner md-grid" data-md-component="container">
+            <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <nav class="md-nav md-nav--primary" data-md-level="0">
+        <label class="md-nav__title md-nav__title--site" for="__drawer"><span class="md-nav__button md-logo"><img height="48" src="/chicory.github.io/assets/img/favicon.png" width="48"></span> Chicory AI</label>
+        <div class="md-nav__source">
+          <a class="md-source" data-md-source="github" href="https://github.com/chicoryai/chicory.github.io" title="Go to repository">
+          <div class="md-source__icon">
+            <svg height="24" viewbox="0 0 24 24" width="24">
+            <use height="24" width="24" xlink:href="#__github"></use></svg>
+          </div>
+          <div class="md-source__repository">
+            chicoryai/chicory.github.io
+          </div></a>
+        </div>
+
+        <ul class="md-nav__list" data-md-scrollfix="">
+          <li class="md-nav__item md-nav__item--active">
+            <input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"> 
+                <label class="md-nav__link md-nav__link--active" for="__toc">Home</label>
+                  <a class="md-nav__link md-nav__link--active" href="/chicory.github.io/" title="Home">Home</a>
+
+            <nav class="md-nav md-nav--secondary">
+              <label class="md-nav__title" for="__toc">Table of contents</label>
+              <ul class="md-nav__list" data-md-scrollfix="">
+                
+                <li class="md-nav__item">
+                  <a class="md-nav__link" href="/chicory.github.io/docs/getting-started"
+                     id="pancakes-getting-started" 
+                     title="Getting Started">Getting Started</a>
+                </li>
+                
+                <li class="md-nav__item">
+                  <a class="md-nav__link" href="/chicory.github.io/docs/integration"
+                     id="pancakes-integration" 
+                     title="Integration">Integration</a>
+                </li>
+                
+                <li class="md-nav__item">
+                  <a class="md-nav__link" href="/chicory.github.io/docs/deployment"
+                     id="pancakes-deployment" 
+                     title="Deployment">Deployment</a>
+                </li>
+                
+              </ul>
+            </nav>
+          </li>
+
+          <!-- This navigation is completely for mobile -->
+          <li class="md-nav__item mobile-nav" style="display:none">
+            <a class="md-nav__link" href="/chicory.github.io/docs/getting-started" title="Getting Started">Getting Started</a>
+          </li><li class="md-nav__item mobile-nav" style="display:none">
+            <a class="md-nav__link" href="/chicory.github.io/docs/integration" title="Integration">Integration</a>
+          </li><li class="md-nav__item mobile-nav" style="display:none">
+            <a class="md-nav__link" href="/chicory.github.io/docs/deployment" title="Deployment">Deployment</a>
+          </li>
+
+          <!-- This navigation is completely for non mobile -->
+         
+         <li class="md-nav__item md-nav__item--nested not-mobile-nav">
+             <a class="md-nav__link pancakes-parent" href="/chicory.github.io/docs/getting-started"
+                id="pancakes-getting-started" 
+                title="Getting Started">Getting Started</a>
+                
+         </li>
+         <li class="md-nav__item md-nav__item--nested not-mobile-nav">
+             <a class="md-nav__link pancakes-parent" href="/chicory.github.io/docs/integration"
+                id="pancakes-integration" 
+                title="Integration">Integration</a>
+                
+         </li>
+         <li class="md-nav__item md-nav__item--nested not-mobile-nav">
+             <a class="md-nav__link pancakes-parent" href="/chicory.github.io/docs/deployment"
+                id="pancakes-deployment" 
+                title="Deployment">Deployment</a>
+                
+         </li>
+
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <nav class="md-nav md-nav--secondary">
+        <label class="md-nav__title" for="__toc">Table of contents</label>
+        <ul id="nav-toc" class="md-nav__list" data-md-scrollfix="">
+        <!-- toc will be appended here!-->
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+                <div id="md-container-pancakes">
+                <div class="md-content"> 
+    <article class="md-content__inner md-typeset">
+    <h1 id="integration-guide-for-platform-services">Integration Guide for Platform Services</h1>
+
+<h3 id="1-databricks-integration"><strong>1. Databricks Integration</strong></h3>
+
+<h4 id="goal-enable-api-access-to-run-get-requests-and-query-data-for-reading"><strong>Goal</strong>: Enable API access to run “GET” requests and query data for reading.</h4>
+
+<p><strong>Current Support Scope</strong>:</p>
+<ul>
+  <li>Single Catalog</li>
+  <li>Single Schema</li>
+</ul>
+
+<p><strong>Requirements</strong>:</p>
+<ul>
+  <li>Databricks workspace with API integration enabled.</li>
+  <li>API token for authentication.</li>
+  <li><code class="language-plaintext highlighter-rouge">values.yaml</code> file to pass necessary configurations as secret environment variables (can be found in the Helm chart directory.)</li>
+</ul>
+
+<p><strong>Steps</strong>:</p>
+
+<ol>
+  <li><strong>Generate API Token</strong>:
+    <ul>
+      <li>Log in to your Databricks workspace.</li>
+      <li>Go to <strong>User Settings</strong> &gt; <strong>Access Tokens</strong>.</li>
+      <li>Create a new token and save it securely. Take care since you won’t be able to see this again.</li>
+    </ul>
+  </li>
+  <li><strong>Update Values</strong>:
+    <ul>
+      <li>Add the following values in the <code class="language-plaintext highlighter-rouge">values.yaml</code> file or pass them as environment variables:</li>
+    </ul>
+
+    <p>For Databricks Integration:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">DATABRICKS_ACCESS_TOKEN</code>-  The API token generated in Step 1.</li>
+      <li><code class="language-plaintext highlighter-rouge">DATABRICKS_HOST</code> - URL of your Databricks workspace (e.g., https://<your-workspace>.cloud.databricks.com).</your-workspace></li>
+      <li><code class="language-plaintext highlighter-rouge">DATABRICKS_HTTP_PATH</code> - HTTP path for your Databricks cluster or SQL endpoint. This is found under the <strong>Cluster</strong> or <strong>SQL Endpoint</strong> details in Databricks.e</li>
+      <li><code class="language-plaintext highlighter-rouge">DATABRICKS_CATALOG</code>: The catalog name in your Databricks environment, under which the data resides.</li>
+      <li><code class="language-plaintext highlighter-rouge">DATABRICKS_SCHEMA</code> :  The schema within the catalog where your target tables or data structures are located.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="2-google-docs"><strong>2. Google Docs</strong></h3>
+
+<h4 id="goal-enable-api-access-to-run-get-on-google-docs"><strong>Goal</strong>: Enable API access to run “GET” on google docs.</h4>
+
+<p><strong>Requirements</strong>:</p>
+<ul>
+  <li>Google Cloud account access with Google Doc API integration enabled.</li>
+  <li>Credentials for authentication.</li>
+  <li>Download credentials json file to pass necessary configurations as environment variables (can be download from Google cloud console.)</li>
+</ul>
+
+<p><strong>Steps</strong>:</p>
+<ol>
+  <li><strong>Set Up Google Cloud Project</strong>
+    <ol>
+      <li>Visit the <a href="https://console.cloud.google.com">Google Cloud Console</a>.</li>
+      <li>Create a new project or select an existing one.</li>
+      <li>Enable the <a href="https://developers.google.com/docs/api/reference/rest">Google Drive API</a>:
+        <ul>
+          <li>Navigate to <code class="language-plaintext highlighter-rouge">APIs &amp; Services &gt; Library</code>.</li>
+          <li>Search for “Google Drive API” and enable it.</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li><strong>Set Up a Service Account</strong>
+    <ol>
+      <li>Go to Google Cloud Console:
+        <ul>
+          <li>Navigate to Google Cloud Console.</li>
+        </ul>
+      </li>
+      <li>Create a Service Account:
+        <ul>
+          <li>Go to <code class="language-plaintext highlighter-rouge">IAM &amp; Admin &gt; Service Accounts</code>.</li>
+          <li>Click Create Service Account.</li>
+          <li>Provide a name and description for the account.</li>
+        </ul>
+      </li>
+      <li>Assign Permissions:
+        <ul>
+          <li>Assign the <code class="language-plaintext highlighter-rouge">Editor</code> or <code class="language-plaintext highlighter-rouge">Owner</code> role to the Service Account, or a custom role that allows accessing Google Drive files.</li>
+        </ul>
+      </li>
+      <li>Generate a Key:
+        <ul>
+          <li>After creating the Service Account, select it from the list.</li>
+          <li>Click Add Key &gt; Create New Key and choose <code class="language-plaintext highlighter-rouge">JSON</code>.</li>
+          <li>Download the JSON key file (contains credentials like <code class="language-plaintext highlighter-rouge">client_email</code>, <code class="language-plaintext highlighter-rouge">private_key</code>, etc.).</li>
+          <li>You will need to extract information from this file into deployment secrets.
+<img src="../assets/img/google_sa1.png" alt="image" />
+<img src="../assets/img/google_sa2.png" alt="image" /></li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li><strong>Share the Google Drive Folder with the Service Account</strong>
+    <ol>
+      <li>Open Google Drive and locate the folder you want to access.</li>
+      <li>Share the folder with the Service Account’s email (<code class="language-plaintext highlighter-rouge">&lt;service-account-name&gt;@&lt;project-id&gt;.iam.gserviceaccount.com</code>) and give it appropriate permissions (e.g., Viewer, Editor).</li>
+    </ol>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">values.yaml</code> file with environment variables:</p>
+
+    <p>For Google Docs Integration:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY_ID</code>: Extract from client_secret…json file</li>
+      <li><code class="language-plaintext highlighter-rouge">GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY</code>: Extract from client_secret…json file</li>
+      <li><code class="language-plaintext highlighter-rouge">GOOGLE_SERVICE_ACCOUNT_CLIENT_ID</code>: Extract from client_secret…json file</li>
+      <li><code class="language-plaintext highlighter-rouge">GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL</code>: Extract from client_secret…json file</li>
+      <li><code class="language-plaintext highlighter-rouge">GOOGLE_SERVICE_ACCOUNT_CLIENT_CERT_URL</code>: Extract from client_secret…json file</li>
+      <li><code class="language-plaintext highlighter-rouge">GOOGLE_PROJECT_ID</code>: Google Cloud Project ID with Enabled Google Doc API access.</li>
+      <li><code class="language-plaintext highlighter-rouge">GOOGLE_FOLDER</code>: Google Folder Id. Copy the folder’s ID from the URL: https://drive.google.com/drive/folders/<folder-id></folder-id></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="3-confluence"><strong>3. Confluence</strong></h3>
+
+<h4 id="goal-access-and-download-documents-html-from-confluence-account"><strong>Goal</strong>: Access and Download documents (html) from Confluence account.</h4>
+
+<p><strong>Current Support Scope</strong>:</p>
+<ul>
+  <li>Supports Confluence Cloud and Confluence Server/Data Center.</li>
+  <li>Uses the Confluence REST API for programmatic access to access Single Space.</li>
+  <li>Outputs HTML files for all pages in the specified space.</li>
+</ul>
+
+<p><strong>Requirements</strong>:</p>
+<ul>
+  <li>A Confluence account with access to API token generation.</li>
+  <li>A Confluence Target Space.</li>
+</ul>
+
+<p><strong>Steps</strong>:</p>
+<ol>
+  <li><strong>Base URL</strong>: The URL of your Confluence instance
+    <ul>
+      <li>Example for Confluence Cloud: <code class="language-plaintext highlighter-rouge">https://your-domain.atlassian.net/wiki</code></li>
+      <li>Example for Confluence Server/Data Center: <code class="language-plaintext highlighter-rouge">https://confluence.your-company.com</code></li>
+    </ul>
+  </li>
+  <li><strong>API Token</strong>:
+    <ul>
+      <li>For Confluence Cloud: Generate via Atlassian account’s API token page: https://id.atlassian.com/manage/api-tokens</li>
+      <li>For Server/Data Center: Use username/password or request an API token if supported.</li>
+    </ul>
+  </li>
+  <li><strong>Space Key</strong>:
+    <ul>
+      <li>The unique identifier for the Confluence space.</li>
+      <li>Found in the URL, e.g., <code class="language-plaintext highlighter-rouge">/spaces/SPACEKEY/overview</code>.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">values.yaml</code> file witk Slack environment variables:</p>
+
+    <p>For Confluence Space Integration:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">CONFLUENCE_BASE_URL</code>: Base Url of Confluence Domain. eg: “https://chicory.atlassian.net/wiki/”</li>
+      <li><code class="language-plaintext highlighter-rouge">CONFLUENCE_API_TOKEN</code>: API Token with appropriate access.</li>
+      <li><code class="language-plaintext highlighter-rouge">CONFLUENCE_SPACE_KEY</code>: Space ID.</li>
+      <li><code class="language-plaintext highlighter-rouge">CONFLUENCE_EMAIL</code>: User email, who owns the Token.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="4-github-integration"><strong>4. GitHub Integration</strong></h3>
+
+<h4 id="goal-enable-api-access-to-fetch-repository-data-read-files-and-integrate-with-an-ai-bot-for-automated-analysis"><strong>Goal</strong>: Enable API access to fetch repository data, read files, and integrate with an AI bot for automated analysis.</h4>
+
+<p><strong>Current Support Scope</strong>:</p>
+<ul>
+  <li>Supports repository-level access for reading files.</li>
+  <li>Automates cloning, reading, and updating repository files.</li>
+  <li>Provides integration with an AI agent for processing code or documentation.</li>
+</ul>
+
+<p><strong>Requirements</strong>:</p>
+<ul>
+  <li>A GitHub account with access to the repositories you wish to integrate.</li>
+  <li>A personal access token (PAT) or organization-level token with the required scopes.</li>
+  <li>A <code class="language-plaintext highlighter-rouge">.yaml</code> configuration file for passing environment variables securely.</li>
+</ul>
+
+<p><strong>Steps</strong>:</p>
+
+<ol>
+  <li><strong>Generate a Personal Access Token (PAT)</strong>:
+    <ul>
+      <li>Log in to your GitHub account.</li>
+      <li>Go to <strong>Settings &gt; Developer Settings &gt; Personal Access Tokens &gt; Tokens (classic)</strong>.</li>
+      <li>Generate a new token with the following scopes:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">repo</code>: Full control of private repositories.</li>
+          <li><code class="language-plaintext highlighter-rouge">read:org</code>: Read-only access to organization data (if accessing organizational repositories).</li>
+          <li><code class="language-plaintext highlighter-rouge">workflow</code>: Access workflows for triggering or managing GitHub Actions (optional).</li>
+        </ul>
+      </li>
+      <li>Save the token securely, as it will not be visible again.</li>
+    </ul>
+  </li>
+  <li><strong>Update Values</strong>:
+    <ul>
+      <li>Add the following values in the <code class="language-plaintext highlighter-rouge">values.yaml</code> file or pass them as environment variables:</li>
+    </ul>
+
+    <p>For Databricks Integration:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">GITHUB_USERNAME</code>: Your GitHub username.</li>
+      <li><code class="language-plaintext highlighter-rouge">GITHUB_ACCESS_TOKEN</code>: The personal access token generated in Step 1.</li>
+      <li><code class="language-plaintext highlighter-rouge">GITHUB_BASE_URL</code>: The base URL for your GitHub instance (e.g., https://api.github.com for GitHub cloud or https://<enterprise-domain>/api/v3 for enterprise GitHub).</enterprise-domain></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="5-slack-integration"><strong>5. Slack Integration</strong></h3>
+
+<h4 id="goal-set-up-an-installable-slack-bot-to-fetch-chat-messages-from-channels-and-integrate-with-an-ai-bot-for-the-inference-service"><strong>Goal</strong>: Set up an installable Slack bot to fetch chat messages from channels and integrate with an AI bot for the inference service.</h4>
+
+<p><strong>Requirements</strong>:</p>
+<ul>
+  <li>A Slack bot token with necessary permissions.</li>
+  <li>A Slack workspace configured to allow bot installation.</li>
+</ul>
+
+<p><strong>Steps</strong>:</p>
+
+<ol>
+  <li><strong>Create a Slack App</strong>:
+    <ul>
+      <li>Go to the <a href="https://api.slack.com/apps">Slack API Dashboard</a>.</li>
+      <li>Click Create an App and choose From Scratch.</li>
+      <li>Provide an App Name (e.g., “Chicory Bot”) and select your workspace.</li>
+      <li>Click <strong>Create App</strong>.</li>
+    </ul>
+  </li>
+  <li><strong>Configure OAuth &amp; Permissions:</strong>:
+    <ul>
+      <li>In the App settings, navigate to OAuth &amp; Permissions.</li>
+      <li>Add the following Bot Token Scopes under <strong>Scopes</strong>:
+        <ul>
+          <li><strong><code class="language-plaintext highlighter-rouge">chat:write</code></strong>: To send messages in channels and DMs.</li>
+          <li><strong><code class="language-plaintext highlighter-rouge">channels:history</code></strong>: To read message history from public channels.</li>
+          <li><strong><code class="language-plaintext highlighter-rouge">app_mentions:read</code></strong>: To listen for mentions of the bot.</li>
+          <li><strong><code class="language-plaintext highlighter-rouge">im:history</code></strong>: To read message history in direct messages (optional).</li>
+          <li><strong><code class="language-plaintext highlighter-rouge">channels:read</code></strong>: To access basic channel information.</li>
+        </ul>
+      </li>
+      <li>Save changes.
+        <ul>
+          <li>Slack Integration Config :<img src="../assets/img/slack.png" alt="image" />
+ ```bash
+ In short - the steps to verify permissions:
+            <ol>
+              <li>Navigate to your Slack App dashboard at Slack API Apps.</li>
+              <li>Go to <strong>OAuth &amp; Permissions</strong> and review the scopes listed under Bot Token Scopes.</li>
+              <li>Ensure the following scopes are included:
+chat:write
+channels:history
+app_mentions:read
+im:history (optional)
+channels:read
+ ```</li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+      <li>Generate OAuth Tokens:
+        <ul>
+          <li>Click Install App to Workspace.</li>
+          <li>Review the permissions and authorize the app for your workspace.</li>
+          <li>Save the generated Bot User OAuth Token securely.</li>
+          <li>Slackbot Token: <img src="../assets/img/slack_oauth.png" alt="image" /></li>
+        </ul>
+      </li>
+      <li>Slackbot Signing Secret: <img src="../assets/img/slack_sign_sec.png" alt="image" /></li>
+      <li>Slackbot Bot Id: With the OAuth Access Token, you can request for BOT ID, It should start with B (e.g., B01ABCDEFG).
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X POST -H "Authorization: Bearer xoxb-your-token" https://slack.com/api/auth.test
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Update <code class="language-plaintext highlighter-rouge">values.yaml</code> file witk Slack environment variables:</p>
+
+    <p>For Slack Integration:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">SLACK_BOT_ID</code>: The unique ID of your Slack bot, generated when you create the bot in the Slack App dashboard and is used to reference the bot in Slack interactions.</li>
+      <li><code class="language-plaintext highlighter-rouge">SLACK_SIGNING_SECRET</code>: The signing secret for validating Slack requests to your backend and helps to ensures that requests are genuinely from Slack.</li>
+      <li><code class="language-plaintext highlighter-rouge">SLACK_BOT_TOKEN</code>: The API token for your Slack bot, used for authenticating API calls made on behalf of the bot (e.g., sending messages or interacting with users).</li>
+    </ul>
+  </li>
+  <li><strong>Set Up Event Subscriptions</strong>:
+    <ul>
+      <li>Navigate to <strong>Event Subscriptions</strong> in your Slack App settings.</li>
+      <li>Enable <strong>Event Subscriptions</strong> and set the <strong>Request URL</strong> to your backend endpoint (e.g., <code class="language-plaintext highlighter-rouge">https://your-backend-service.com/slack/events</code>).</li>
+      <li>Add the following events under <strong>Subscribe to bot events</strong>:
+        <ul>
+          <li><strong><code class="language-plaintext highlighter-rouge">app_mention</code></strong>: To trigger the bot when it is mentioned.</li>
+          <li><strong><code class="language-plaintext highlighter-rouge">message.im</code></strong>: To listen for direct messages (optional for private interactions).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Configure and Reinstall the App</strong>:
+    <ul>
+      <li>After configuring the event subscriptions and permissions, reinstall the app if needed by navigating to <strong>Install App</strong> &gt; <strong>Reinstall to Workspace</strong>.</li>
+    </ul>
+  </li>
+  <li><strong>Test the Bot</strong>:
+    <ul>
+      <li>Mention the bot in a channel using <code class="language-plaintext highlighter-rouge">@your-bot-name</code> to ensure it interacts with the backend inference service and responds.</li>
+      <li>Send a direct message to test interactions if <code class="language-plaintext highlighter-rouge">message.im</code> is configured.</li>
+      <li>Error Scenarios: Test how the bot behaves when it cannot reach the backend or when invalid commands are sent.</li>
+    </ul>
+  </li>
+  <li><strong>Set Up AI Bot for Inference</strong>:
+    <ul>
+      <li>Ensure the bot can process and respond to user interactions. Implement a backend service to handle incoming events from Slack, process them, and send responses back through Slack’s Web API.</li>
+      <li>Example to post a response:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;your-bot-token&gt;"</span> <span class="nt">-H</span> <span class="s2">"Content-type: application/json"</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'{
+  "channel": "&lt;channel-id&gt;",
+  "text": "Here is your processed response!"
+}'</span> https://slack.com/api/chat.postMessage
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>Slack Webhooks Details: <a href="https://api.slack.com/messaging/webhooks">link</a>
+    <ul>
+      <li>Note: Webhooks can be created in Incoming Webhooks under the Slack App settings.</li>
+      <li>Example payload for sending messages with webhooks
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">{</span>
+ <span class="s2">"text"</span>: <span class="s2">"This is a test message"</span>,
+ <span class="s2">"channel"</span>: <span class="s2">"#general"</span>
+ <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<ol>
+  <li><strong>Add the app/bot to target channel</strong>:
+    <ul>
+      <li>add the app to a channel: settings of a channel -&gt; Integrations -&gt; add apps -&gt; target <Chicory> app: ![alt text](../assets/img/slack-app.png)</Chicory></li>
+      <li>add the bot to the channel: like an user by using @Chicory: <img src="../assets/img/slack-bot.png" alt="alt text" /></li>
+    </ul>
+  </li>
+</ol>
+
+<p>This setup allows the Slack bot to interact with users, fetch content from channels, and pass user inputs to the backend inference service for processing and responses.</p>
+
+<hr />
+
+<h2 id="summary"><strong>Summary</strong></h2>
+
+<p>Following the above steps will enable your infrastructure and services to integrate seamlessly with Databricks, GitHub, Confluence, and Slack, allowing for data access, document management, and user interactions.</p>
+
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function() {
+
+    var toc = $('#nav-toc');
+
+    // Select each header
+    sections = $('#md-container-pancakes h1');
+        $.each(sections, function(idx, v) {
+            section = $(v);
+            var div_id = $(section).attr('id');
+            var div_text = section.text().split('¶')[0];
+            var parent = $("#" + div_id)
+            var content = '<li id="link_' + div_id + '" class="md-nav__item"><a class="md-nav__link" href="#' + div_id + '" title="' + div_text +'">' + div_text +'</a></li>';
+            $(toc).append(content);
+
+            // Add section code to subnavigation
+            var children = $('<nav class="md-nav"><ul class="md-nav__list"></nav></ul>')
+            var contenders = $("#" + div_id).nextUntil( "h1" );
+            $.each(contenders, function(idx, contender){
+               if($(contender).is('h2')) {
+                   var contender_id = $(contender).attr('id');
+                   var contender_text = $(contender).text().split('¶')[0];
+                   var content = '<li class="md-nav__item"><a class="md-nav__link" href="#' + contender_id + '" title="' + contender_text +'">' + contender_text +'</a></li>';
+                   children.append(content);
+                }
+             })
+             $("#link_" + div_id).append(children);
+        });
+    });
+</script>
+
+    <!-- this will parse through the header fields and add a button to open
+     an issue / ask a question on Github. The editable field should be in
+     the post frontend matter, and refer to the label to open the issue for -->
+
+<style>
+.more {
+    float:right;
+    font-size: 1.0rem !important;
+}
+.more:hover {
+    color: cornflowerblue !important;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    font-weight: 200;
+    box-shadow: 0px 8px 6px 0px rgba(0,0,0,0.2);
+    padding: 0px 10px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
+<script>
+$(document).ready(function() {
+
+    var divs = $("#h1,h2,h3,h4"); 
+    $.each(divs, function(i,e){
+
+        // Edit
+        var did = $(e).attr('id');
+        var start = '<div class="dropdown more"><span><i class="fa fa-ellipsis-h more" title="Edit"></i></span><div class="dropdown-content">';
+
+        // Edit (assuming deployed under main organization repo)
+        var link = "https://github.com/chicoryai/chicory.github.io/edit/master/_docs/integration.md#" + did;
+        var button = "<p><a href='" + link + "' target='_blank'>Edit this page</a></p>";
+        start += button;
+
+        // Issues;
+        var link = "https://github.com/chicoryai/chicory.github.io/issues/new?labels=question&title=Question:&body=Question on: https://github.com/chicoryai/chicory.github.io/tree/master/_docs/integration.md%23" + did;
+
+        var button = "<p><a href='" + link + "' target='_blank'>Ask a Question</a></p>";
+        start += button;
+        start += "</div></div>";
+        $(e).append(start)
+
+    })
+});
+</script>
+
+    </article>
+</div>      
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="c-footer md-footer-nav">
+  <div class="u-container c-footer__container">
+    <nav class="md-footer-nav__inner md-grid">
+         <a href="/chicory.github.io/docs/subfolder/example-page" title="A Nested Page" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                A Nested Page
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+      </nav>
+    </div>
+  
+   <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2025 - 
+          </div>        
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <a href="https://github.com/chicoryai" target="_blank" class="md-footer-social__link fa fa-github"></a>
+      
+      
+      
+  </div>
+
+    </div>
+  </div>
+
+</footer>
+<script src="/chicory.github.io/assets/js/application.js"></script>
+
+<script>app.initialize({version:"0.17.4", url:{base:'/chicory.github.io'}})</script>
+
+    <script>
+var headers = ["h1", "h2", "h3", "h4"]
+var colors = ["red", "orange", "green", "blue"]
+
+$.each(headers, function(i, header){
+    var color = colors[i];
+    $(header).each(function () {
+        var href=$(this).attr("id");
+        $(this).append('<a class="headerlink" style="color:' + color + '" href="#' + href + '" title="Permanent link">¶</a>')
+    });
+})
+
+// Ensure that sidebar on left has arrows
+$(".pancakes-parent").on('click', function(){ 
+    console.log($(this).next());
+    $(this).next().find('.pancakes-child').toggle();
+    if ($(this).hasClass('open-parent')){
+        $(this).removeClass('open-parent');
+    } else {
+        $(this).addClass('open-parent');
+    }
+})
+</script>
+
+    <script>
+$('h1').first().append('<div><span class="badge badge-danger"><a style="cursor:pointer; color:white" href="https://ask.cyberinfrastructure.org/search?q=raw dump">raw dump</a></span><span class="badge badge-danger"><a style="cursor:pointer; color:white" href="https://ask.cyberinfrastructure.org/search?q=databricks">databricks</a></span><span class="badge badge-danger"><a style="cursor:pointer; color:white" href="https://ask.cyberinfrastructure.org/search?q=confluence">confluence</a></span><span class="badge badge-danger"><a style="cursor:pointer; color:white" href="https://ask.cyberinfrastructure.org/search?q=google docs">google docs</a></span><span class="badge badge-danger"><a style="cursor:pointer; color:white" href="https://ask.cyberinfrastructure.org/search?q=github">github</a></span><span class="badge badge-danger"><a style="cursor:pointer; color:white" href="https://ask.cyberinfrastructure.org/search?q=slack">slack</a></span></div>')</script>
+
+    <style>
+#scrolltop {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #4f2dc2; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 10px 15px; /* Some padding */
+  border-radius: 100px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+  font-weight: 600;
+}
+
+#scrolltop:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+</style>
+<button onclick="topFunction()" id="scrolltop" title="Go to top">🔝</button>
+
+<script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("scrolltop").style.display = "block";
+  } else {
+    document.getElementById("scrolltop").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+
+    
+
+  </body>
+</html>

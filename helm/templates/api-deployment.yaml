@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery-api
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.api.replicas }}
+  selector:
+    matchLabels:
+      app: discovery-api
+  template:
+    metadata:
+      labels:
+        app: discovery-api
+        {{- include "common.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "common.serviceAccountName" . }}
+      containers:
+      - name: discovery-api
+        image: {{ .Values.api.image }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        {{- range $key, $value := .Values.api.env }}
+        - name: {{ $key }}
+          value: "{{ $value }}"
+        {{- end }}
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: OPENAI_API_KEY
+        - name: DATABRICKS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: DATABRICKS_ACCESS_TOKEN
+        - name: DATABRICKS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: DATABRICKS_HOST
+        - name: DATABRICKS_HTTP_PATH
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: DATABRICKS_HTTP_PATH
+        - name: DATABRICKS_CATALOG
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: DATABRICKS_CATALOG
+        - name: DATABRICKS_SCHEMA
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: DATABRICKS_SCHEMA
+        - name: SLACK_BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: SLACK_BOT_TOKEN
+        - name: SLACK_BOT_ID
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: SLACK_BOT_ID
+        - name: SLACK_SIGNING_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: SLACK_SIGNING_SECRET
+        volumeMounts:
+        - name: api-ebs-volume
+          mountPath: {{ .Values.volume.mountPath }}
+      volumes:
+      - name: api-ebs-volume
+        persistentVolumeClaim:
+          claimName: api-ebs-pvc

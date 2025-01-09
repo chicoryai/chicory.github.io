@@ -1,0 +1,127 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: training-job-sync
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ include "common.serviceAccountName" . }}
+      containers:
+      - name: training-job-sync
+        image: {{ .Values.job.image }}
+        imagePullPolicy: Always
+        env:
+        {{- range $key, $value := .Values.job.env }}
+        - name: {{ $key }}
+          value: "{{ $value }}"
+        {{- end }}
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: OPENAI_API_KEY
+        - name: DATABRICKS_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: DATABRICKS_ACCESS_TOKEN
+        - name: DATABRICKS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: DATABRICKS_HOST
+        - name: DATABRICKS_HTTP_PATH
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: DATABRICKS_HTTP_PATH
+        - name: DATABRICKS_CATALOG
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: DATABRICKS_CATALOG
+        - name: DATABRICKS_SCHEMA
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: DATABRICKS_SCHEMA
+        - name: GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY_ID
+        - name: GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
+        - name: GOOGLE_SERVICE_ACCOUNT_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GOOGLE_SERVICE_ACCOUNT_CLIENT_ID
+        - name: GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL
+        - name: GOOGLE_SERVICE_ACCOUNT_CLIENT_CERT_URL
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GOOGLE_SERVICE_ACCOUNT_CLIENT_CERT_URL
+        - name: GOOGLE_PROJECT_ID
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GOOGLE_PROJECT_ID
+        - name: GOOGLE_FOLDER
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GOOGLE_FOLDER
+        - name: CONFLUENCE_BASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: CONFLUENCE_BASE_URL
+        - name: CONFLUENCE_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: CONFLUENCE_API_TOKEN
+        - name: CONFLUENCE_SPACE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: CONFLUENCE_SPACE_KEY
+        - name: CONFLUENCE_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: CONFLUENCE_EMAIL
+        - name: GITHUB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GITHUB_USERNAME
+        - name: GITHUB_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GITHUB_ACCESS_TOKEN
+        - name: GITHUB_BASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: cronjob-secrets
+              key: GITHUB_BASE_URL
+        volumeMounts:
+        - name: job-ebs-volume
+          mountPath: {{ .Values.volume.mountPath }}
+      restartPolicy: OnFailure
+      volumes:
+      - name: job-ebs-volume
+        persistentVolumeClaim:
+          claimName: job-ebs-pvc

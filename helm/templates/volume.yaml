@@ -1,0 +1,41 @@
+# Define the StorageClass for dynamic provisioning of EBS volumes
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3                  # EBS volume type (gp3 is recommended)
+  fsType: ext4               # Filesystem type
+  encrypted: "true"          # Enable encryption for EBS volume
+volumeBindingMode: WaitForFirstConsumer # Bind volume to a node only when a pod uses it
+---
+# PersistentVolumeClaim for the API service
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: api-ebs-pvc
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Gi
+  storageClassName: ebs-sc
+---
+# PersistentVolumeClaim for the Job
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: job-ebs-pvc
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Gi
+  storageClassName: ebs-sc

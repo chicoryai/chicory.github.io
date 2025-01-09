@@ -1,0 +1,5 @@
+apiVersion: v2
+name: api-cronjob-s3
+description: A Helm chart for Chicory AI runtime service and training job sharing a volume with S3 (index)
+version: 0.1.1
+appVersion: "0.3.0b"

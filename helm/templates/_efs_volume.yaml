@@ -1,0 +1,67 @@
+# EFS or local testing
+# Define the PersistentVolume for static provisioning (if required)
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ebs-pv1
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  capacity:
+    storage: 20Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: {{ .Values.volume.mountPath }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ebs-pv2
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  capacity:
+    storage: 20Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: {{ .Values.volume.mountPath }}
+---
+# PersistentVolumeClaim for the API Service
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: api-ebs-pvc
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: standard
+  volumeName: ebs-pv1
+---
+# PersistentVolumeClaim for the Job
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: job-ebs-pvc
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: standard
+  volumeName: ebs-pv2
